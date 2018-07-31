@@ -1,6 +1,5 @@
 import sys
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 from model import *
 from data_list import *
@@ -30,7 +29,7 @@ def main():
     cost = paddle.layer.classification_cost(input=fc, label=lbl)
 
     myReader = MyReader(imageSize=imageSize,center_crop_size=crop_size)
-    trainer_reader = myReader.train_reader(train_list="/media/st/DATA01/Projects/Paddle_face_forShentao/train.txt")
+    trainer_reader = myReader.train_reader(train_list="./train.txt")
 
     reader = paddle.batch(reader=paddle.reader.shuffle(reader=trainer_reader, buf_size=2048), batch_size=BATCH_SIZE)
     print('reader done')
@@ -85,7 +84,7 @@ def val(start, end, modelpath=''):
             parameters = paddle.parameters.Parameters.from_tar(f)
 
 
-        infile = open('/media/st/DATA01/Projects/Paddle_face_forShentao/test_222.txt')
+        infile = open('./test.txt')
         testdata1, testdata2 = [], []
         fea1, fea2, fea1_flip, fea2_flip, labels = [], [], [], [], []
         count = 0
@@ -118,5 +117,5 @@ def val(start, end, modelpath=''):
 
 
 if __name__ == '__main__':
-    # main()
-    val(40,47)
+    main()
+    val(0,100)
