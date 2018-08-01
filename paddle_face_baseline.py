@@ -13,7 +13,7 @@ BATCH_SIZE = 128
 model_name = "baseline"
 
 
-paddle.init(use_gpu=1, trainer_count=1)
+paddle.init(use_gpu=0, trainer_count=1)
 def model_def():
     image = paddle.layer.data(
         name="image", type=paddle.data_type.dense_vector(DATA_DIM))
